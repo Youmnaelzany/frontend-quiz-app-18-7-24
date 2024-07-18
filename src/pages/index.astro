@@ -1,9 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets';
+import {Image} from 'astro:assets';
 import '@/styles/globals.css';
+import Data from '../data/data.json';
+import Sunandmoon from '../components/Sunandmoon.astro';
 ---
 
 <Layout title='Frontend Quiz App.'>
-  <main></main>
+  <Sunandmoon />
+  <main
+    class='mx-6 mt-2 md:mx-16 md:mt-[3.94rem] lg:mx-[8.75rem] lg:mt-[6.19rem]'
+  >
+  </main>
 </Layout>

@@ -1,0 +1,76 @@
+---
+import '@/styles/globals.css';
+import {Image} from 'astro:assets';
+import mySunLight from '@/assets/images/icon-sun-light.svg';
+import mySunDark from '@/assets/images/icon-sun-dark.svg';
+import myMoonLight from '@/assets/images/icon-moon-light.svg';
+import myMoonDark from '@/assets/images/icon-moon-dark.svg';
+---
+
+<header
+  class='mx-6 mt-4 flex items-center justify-end gap-4 md:mx-16 md:mt-[3.38rem] lg:mx-[8.75rem] lg:mt-[6.06rem]'
+>
+  <div>
+    <Image src={mySunDark} alt='Sun icon dark' id='mySunDark' />
+    <Image src={mySunLight} alt='Sun icon light' id='mySunLight' hidden />
+  </div>
+  <div class='flex h-7 w-12 items-center rounded-[62.4375rem] bg-[#A729F5]'>
+    <button
+      type='button'
+      class='mx-1 size-5 rounded-full bg-white transition-transform'
+      id='mySlider'
+      aria-label='Toggle theme'
+      aria-controls='theme'
+      aria-expanded='false'></button>
+  </div>
+  <div>
+    <Image src={myMoonDark} alt='Moon icon dark' id='myMoonDark' />
+    <Image src={myMoonLight} alt='Moon icon light' id='myMoonLight' hidden />
+  </div>
+</header>
+
+<style is:global>
+  .dark-theme {
+    background-color: #313e51;
+  }
+
+  .light-theme {
+    background-color: #f4f6fa;
+  }
+
+  .slider-left {
+    transform: translateX(0);
+  }
+
+  .slider-right {
+    transform: translateX(1.5rem);
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const body = document.body;
+    const slider = document.getElementById('mySlider');
+    const mySunDark = document.getElementById('mySunDark');
+    const mySunLight = document.getElementById('mySunLight');
+    const myMoonDark = document.getElementById('myMoonDark');
+    const myMoonLight = document.getElementById('myMoonLight');
+
+    const toggleTheme = () => {
+      const isDarkMode = body.classList.toggle('dark-theme');
+      body.classList.toggle('light-theme', !isDarkMode);
+
+      slider.classList.toggle('slider-left', !isDarkMode);
+      slider.classList.toggle('slider-right', isDarkMode);
+
+      mySunDark.hidden = isDarkMode;
+      mySunLight.hidden = !isDarkMode;
+      myMoonDark.hidden = !isDarkMode;
+      myMoonLight.hidden = isDarkMode;
+
+      slider.setAttribute('aria-expanded', isDarkMode);
+    };
+
+    slider.addEventListener('click', toggleTheme);
+  });
+</script>
